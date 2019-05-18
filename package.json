@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "axios": "^0.18.0",
     "install": "^0.12.2",
     "node": "^12.2.0",
     "node-sass": "^4.12.0",
