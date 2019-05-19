@@ -29,7 +29,7 @@ class Cars extends Component {
         super(props);
     }
 
-    // getCars = async => {
+    // getCars = async () => {
     //     try {
     //         const response = await makeRequest('cars');
     //         this.setState({ cars: response })

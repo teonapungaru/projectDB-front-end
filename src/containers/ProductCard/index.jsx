@@ -24,6 +24,14 @@ const styles = {
 
 class MediaCard extends React.Component {
 
+    // sendPurchase = () => {
+    //     try {
+    //         const response = await makeRequest('purchase');
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+
     render() {
         return (
             <Card className={this.props.classes.card}>
@@ -51,7 +59,7 @@ class MediaCard extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions className="buttons">
-                    <Button size="small" color="default">
+                    <Button size="small" color="default" onClick={this.sendPurchase}>
                         Add to cart
                     </Button>
                     <Button size="small" color="default">

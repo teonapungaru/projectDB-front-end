@@ -10,8 +10,11 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const CONFIG = {
     'cars': {
         method: METHODS.GET,
-        url: `${BASE_URL}/api/v1/`,
-        autheticated: true
+        url: `${BASE_URL}/api/v1/`
+    },
+    'purchase': {
+        method: METHODS.POST,
+        url: `${BASE_URL}/api/v1/`
     }
 }
 
