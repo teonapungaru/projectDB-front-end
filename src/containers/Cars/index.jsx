@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import EnhancedTable from '../Table'
 import makeRequest from '../../service/dataService';
+import MediaCard from '../ProductCard'
+
+import '../Cars/cars.sass'
 
 const cars = [
-    { id: 'model', numeric: false, disablePadding: true, label: 'Model' },
-    { id: 'engine', numeric: true, disablePadding: false, label: 'Engine' },
-    { id: 'horsePower', numeric: true, disablePadding: false, label: 'Horse Power' },
-    { id: 'fuelType', numeric: false, disablePadding: false, label: 'Fuel Type' },
-    { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
+    {
+        model: 'BMW',
+        engine: 2.1,
+        horsePower: 210,
+        fuelType: 'diesel',
+        price: 35000,
+        image: 'https://cache4.pakwheels.com/system/car_generation_pictures/4681/original/BMW_X4_2017.jpg?1506086880'
+    },
+    {
+        model: 'Audi',
+        engine: 1.8,
+        horsePower: 200,
+        fuelType: 'benzina',
+        price: 20000,
+        image: 'https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/vdat/submodels/audi_a3_audi-a3-sedan_2019-1552084281910.jpg'
+    }
 ]
 
 class Cars extends Component {
@@ -27,11 +40,10 @@ class Cars extends Component {
 
     render() {
         return (
-            <div>
-                <EnhancedTable
-                    tableHeader={cars}
-                    tableTitle='Cars'
-                />
+            <div className="cards">
+                {cars.map((car, key) =>
+                <MediaCard itemDetails={car} key={key}/>
+                )}
             </div>
         )
     }

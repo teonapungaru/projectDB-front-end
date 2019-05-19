@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import EnhancedTable from '../Table'
+import MediaCard from '../ProductCard'
 
 const accessories = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
@@ -12,10 +12,9 @@ class Accessories extends Component {
     render() {
         return (
             <div>
-                <EnhancedTable
-                    tableHeader={accessories}
-                    tableTitle='Accessories'
-                />
+                {/* {this.state.accessories.map(accessory =>
+                <MediaCard itemDetails={accessory}/>
+                )} */}
             </div>
         )
     }

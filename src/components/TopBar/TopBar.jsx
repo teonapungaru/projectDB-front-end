@@ -1,10 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import { navigation } from '../../config/path.js'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 import './topBar.sass';
@@ -13,7 +11,6 @@ class TopBar extends React.Component {
 
     constructor() {
         super()
-        //const usercustomers = JSON.parse(window.localStorage.getItem('usercustomers'));
 
         this.state = { anchorEl: null }
     }
