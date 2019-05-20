@@ -5,12 +5,24 @@ const METHODS = {
     POST: 'POST'
 }
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = 'http://localhost:8080';
 
 const CONFIG = {
     'cars': {
         method: METHODS.GET,
-        url: `${BASE_URL}/api/v1/`
+        url: `${BASE_URL}/api/v1/cars`
+    },
+    'accessories': {
+        method: METHODS.GET,
+        url: `${BASE_URL}/api/v1/accessories`
+    },
+    'customers': {
+        method: METHODS.GET,
+        url: `${BASE_URL}/api/v1/customers`
+    },
+    'contactDetails': {
+        method: METHODS.GET,
+        url: `${BASE_URL}/api/v1/contacts`
     },
     'purchase': {
         method: METHODS.POST,
