@@ -7,8 +7,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-import '../CustomersList/customersList.sass'
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -17,63 +20,55 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: 300,
+  },
+  margin: {
+    margin: theme.spacing.unit/2,
   },
 });
 
-let id = 0;
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
+const header = ['First Name', 'Last Name', 'City', 'Street', 'Phone No'];
 
 class SimpleTable extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-      details: this.props.details
-    }
-  }
-
-  // createData(...this.props.customers) {
-  //   id += 1;
-  //   return { id, name, calories, fat, carbs, protein };
-  // }
-  
-  //keys = Object.keys(this.p)
-  //new = Object.assign({}, this.state.details[0])
-
-
 
   render() {
-    console.log(this.props.details)
     return (
       <Paper className={this.props.classes.root}>
         <Table className={this.props.classes.table}>
           <TableHead>
             <TableRow className='tableRow'>
-              {/* {Object.keys(this.props.details).map(item =>
-                <TableCell>{item}</TableCell>
-                )} */}
+              {header.map((item, key) =>
+                <TableCell key={key}>{item}</TableCell>
+              )}
+              <TableCell align="right">
+                <Fab size="small" color="secondary" aria-label="Add" className={this.props.classes.margin}>
+                  <AddIcon />
+                </Fab>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {rows.map(row => (
-              <TableRow key={row.id}>
+            {this.props.details.map((row, key) => (
+              <TableRow key={key}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.customer.firstName}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell component="th" scope="row">
+                  {row.customer.lastName}
+                </TableCell>
+                <TableCell align="left">{row.city}</TableCell>
+                <TableCell align="left">{row.street}</TableCell>
+                <TableCell align="left">{row.phoneNo}</TableCell>
+                <TableCell align="right">
+                  <Button variant="outlined" size="small" className={this.props.classes.margin}>
+                    Edit Phone
+                </Button>
+                  <IconButton aria-label="Delete" className={this.props.classes.margin}>
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </TableCell>
               </TableRow>
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       </Paper>

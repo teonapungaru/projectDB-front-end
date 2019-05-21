@@ -27,7 +27,7 @@ class Customers extends Component {
     getContactDetails = async () => {
         try {
             const response = await makeRequest('contactDetails');
-            console.log(response)
+            //console.log(response)
             this.setState({contactDetails: response})
         } catch (e) {
             console.log(e);
@@ -43,7 +43,7 @@ class Customers extends Component {
         console.log(this.state, 'state')
         return(
             <div>
-                <SimpleTable details={this.state.contactDetails[0]} />
+                <SimpleTable details={this.state.contactDetails} />
             </div>
         )
     }

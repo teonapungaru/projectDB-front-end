@@ -41,10 +41,11 @@ const makeRequest = (httpCall, payload = {}) => {
         try {
             const response = await axios({
                 method: requestData.method,
-                url: httpCall === 'getImage' ? payload : requestData.url,
+                url: requestData.url,
                 ...payload,
             })
 
+            console.log(response.data.result);
             return resolve(response.data.result || response.data);
         } catch (err) {
             return reject(err.response.data.error || "Something went wrong please refresh");

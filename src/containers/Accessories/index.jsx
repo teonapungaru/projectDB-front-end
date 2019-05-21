@@ -3,10 +3,7 @@ import { withRouter } from 'react-router-dom';
 import makeRequest from '../../service/dataService';
 import MediaCard from '../ProductCard'
 
-const accessories = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
-]
+import '../Accessories/accessories.sass'
 
 class Accessories extends Component {
     constructor(props) {
@@ -32,7 +29,7 @@ class Accessories extends Component {
 
     render() {
         return (
-            <div>
+            <div className="cards">
                 {this.state.accessories.map((accessory, key) =>
                 <MediaCard itemDetails={accessory} key={key}/>
                 )}
