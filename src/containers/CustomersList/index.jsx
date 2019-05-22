@@ -29,7 +29,7 @@ const styles = theme => ({
   },
 });
 
-const header = ['firstName', 'lastName', 'city', 'street', 'phoneNo', 'image'];
+const header = ['firstName', 'lastName', 'city', 'street', 'phoneNo'];
 
 class SimpleTable extends React.Component {
   constructor(props) {
@@ -93,6 +93,7 @@ class SimpleTable extends React.Component {
           onClose={this.handleClose}
           open={this.state.openDialog}
           fields={header}
+          title='customer'
         />
       </div>
     );

@@ -14,7 +14,7 @@ import '../ProductCard/productCard.sass'
 
 const styles = {
     card: {
-        maxWidth: 345,
+        maxWidth: 300,
         margin: 20,
     },
     media: {

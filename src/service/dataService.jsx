@@ -27,6 +27,18 @@ const CONFIG = {
     'purchase': {
         method: METHODS.POST,
         url: `${BASE_URL}/api/v1/`
+    },
+    'accessory': {
+        method: METHODS.POST,
+        url: `${BASE_URL}/api/v1/accessories`     
+    },
+    'customer': {
+        method: METHODS.POST,
+        url: `${BASE_URL}/api/v1/contacts`     
+    },
+    'car': {
+        method: METHODS.POST,
+        url: `${BASE_URL}/api/v1/cars`     
     }
 }
 

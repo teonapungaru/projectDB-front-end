@@ -9,7 +9,7 @@ import FormDialog from '../Dialog';
 
 import '../Cars/cars.sass'
 
-const fields =['model', 'engine', 'horsePower', 'fuelType', 'price', 'image'];
+const fields =['model', 'engine', 'horsePower', 'fuelType', 'price'];
 
 class Cars extends Component {
     constructor(props) {
@@ -44,7 +44,7 @@ class Cars extends Component {
     render() {
         console.log(this.state.cars)
         return (
-            <div>
+            <div className="root">
                 <div className="add">
                     <Fab size="small" color="secondary" aria-label="Add" onClick={this.openDialog}>
                         <AddIcon />
@@ -59,6 +59,7 @@ class Cars extends Component {
                     onClose={this.handleClose}
                     open={this.state.openDialog}
                     fields={fields}
+                    title='car'
                 />
             </div>
         )

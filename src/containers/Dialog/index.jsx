@@ -6,6 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import makeRequest from '../../service/dataService';
+
+let newState = {};
+let disable = true;
+
 export default class FormDialog extends React.Component {
     constructor(props) {
         super(props);
@@ -34,12 +39,28 @@ export default class FormDialog extends React.Component {
 
     handleChange = prop => event => {
         this.setState({
-          [prop]: event.target.value
+            [prop]: event.target.value
         });
-      };
+        Object.assign(newState, { [prop]: event.target.value });
+    };
+
+    submit = async () => {
+        try {
+            const response = await makeRequest(`${this.props.title}`, { data: newState });
+            this.setState({
+                open: false
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    disableAdd = () => Object.values(newState).map(item => item.length === 0 ? true : false).length !== 0 ?
+        Object.values(newState).map(item => item.length === 0 ? true : false).reduce((previousVal, currentVal) => previousVal || currentVal) :
+        true;
 
     render() {
-        console.log(this.state)
+        console.log(this.disableAdd(), newState, Object.values(newState).map(item => item.length === 0 ? true : false).length)
         return (
             <div>
                 <Dialog
@@ -47,14 +68,13 @@ export default class FormDialog extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Add</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Add new {this.props.title}</DialogTitle>
                     <DialogContent>
                         {this.props.fields.map((item, key) =>
                             <TextField
                                 margin="dense"
                                 id={item}
                                 label={item}
-                                type="text"
                                 fullWidth
                                 key={key}
                                 value={this.state.item}
@@ -65,10 +85,10 @@ export default class FormDialog extends React.Component {
                     <DialogActions>
                         <Button onClick={this.handleClose}>
                             Cancel
-            </Button>
-                        <Button onClick={this.submit}>
+                        </Button>
+                        <Button onClick={this.submit} disabled={this.disableAdd()}>
                             Add
-            </Button>
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>

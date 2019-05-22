@@ -9,7 +9,7 @@ import FormDialog from '../Dialog';
 
 import '../Accessories/accessories.sass'
 
-const fields = ['name', 'price', 'image'];
+const fields = ['name', 'price' ];
 
 class Accessories extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class Accessories extends Component {
 
     render() {
         return (
-            <div>
+            <div className="root">
                 <div className="add">
                     <Fab size="small" color="secondary" aria-label="Add" onClick={this.openDialog}>
                         <AddIcon />
@@ -58,6 +58,7 @@ class Accessories extends Component {
                     onClose={this.handleClose}
                     open={this.state.openDialog}
                     fields={fields}
+                    title='accessory'
                 />
             </div>
         )
