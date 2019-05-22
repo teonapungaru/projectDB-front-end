@@ -2,57 +2,64 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import makeRequest from '../../service/dataService';
 import MediaCard from '../ProductCard'
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+
+import FormDialog from '../Dialog';
 
 import '../Cars/cars.sass'
 
-// const cars = [
-//     {
-//         model: 'BMW',
-//         engine: 2.1,
-//         horsePower: 210,
-//         fuelType: 'diesel',
-//         price: 35000,
-//         image: 'https://cache4.pakwheels.com/system/car_generation_pictures/4681/original/BMW_X4_2017.jpg?1506086880'
-//     },
-//     {
-//         model: 'Audi',
-//         engine: 1.8,
-//         horsePower: 200,
-//         fuelType: 'benzina',
-//         price: 20000,
-//         image: 'https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/vdat/submodels/audi_a3_audi-a3-sedan_2019-1552084281910.jpg'
-//     }
-// ]
+const fields =['model', 'engine', 'horsePower', 'fuelType', 'price', 'image'];
 
 class Cars extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            cars:[]
+            cars: []
         }
     }
 
     getCars = async () => {
         try {
             const response = await makeRequest('cars');
-            this.setState({cars: response})
+            this.setState({ cars: response })
         } catch (e) {
             console.log(e);
         }
     }
-    
-    componentDidMount(){
+
+    openDialog = () => {
+        this.setState({ openDialog: true })
+    }
+
+    handleClose = () => {
+        this.setState({ openDialog: false });
+    }
+
+    componentDidMount() {
         this.getCars();
     }
 
     render() {
         console.log(this.state.cars)
         return (
-            <div className="cards">
-                {this.state.cars.map((car, key) =>
-                <MediaCard itemDetails={car} key={key}/>
-                )}
+            <div>
+                <div className="add">
+                    <Fab size="small" color="secondary" aria-label="Add" onClick={this.openDialog}>
+                        <AddIcon />
+                    </Fab>
+                </div>
+                <div className="cards">
+                    {this.state.cars.map((car, key) =>
+                        <MediaCard itemDetails={car} key={key} />
+                    )}
+                </div>
+                <FormDialog
+                    onClose={this.handleClose}
+                    open={this.state.openDialog}
+                    fields={fields}
+                />
             </div>
         )
     }

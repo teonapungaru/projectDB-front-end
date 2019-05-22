@@ -39,21 +39,20 @@ class MediaCard extends React.Component {
                     <CardMedia
                         className={this.props.classes.media}
                         image={this.props.itemDetails.image}
-                        title="Contemplative Reptile"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             {this.props.itemTitle}
                         </Typography>
                         <Typography component="div">
-                            {Object.entries(this.props.itemDetails).map((item, key) =>
+                            {Object.entries(this.props.itemDetails).map((item, key) => item[0]!=='image'?
                                 <TextField
                                     disabled
                                     label={item[0]}
                                     value={item[1]}
                                     margin="normal"
                                     key={key}
-                                />
+                                />:null
                             )}
                         </Typography>
                     </CardContent>

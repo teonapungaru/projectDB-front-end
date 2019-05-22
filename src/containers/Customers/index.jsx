@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import makeRequest from '../../service/dataService';
 
-import SimpleTable from '../CustomersList'
+import SimpleTable from '../CustomersList';
 
 class Customers extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            customers:[],
-            contactDetails:[]
+            customers: [],
+            contactDetails: []
         }
     }
 
@@ -18,7 +18,7 @@ class Customers extends Component {
         try {
             const response = await makeRequest('customers');
             console.log(response)
-            this.setState({customers: response})
+            this.setState({ customers: response })
         } catch (e) {
             console.log(e);
         }
@@ -28,22 +28,23 @@ class Customers extends Component {
         try {
             const response = await makeRequest('contactDetails');
             //console.log(response)
-            this.setState({contactDetails: response})
+            this.setState({ contactDetails: response })
         } catch (e) {
             console.log(e);
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getCustomers();
         this.getContactDetails();
     }
 
     render() {
-        console.log(this.state, 'state')
-        return(
+        return (
             <div>
-                <SimpleTable details={this.state.contactDetails} />
+                <div>
+                    <SimpleTable details={this.state.contactDetails} />
+                </div>
             </div>
         )
     }
