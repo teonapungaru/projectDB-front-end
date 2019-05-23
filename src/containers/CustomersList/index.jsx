@@ -14,6 +14,7 @@ import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 
 import FormDialog from '../Dialog';
+import makeRequest from '../../service/dataService';
 
 const styles = theme => ({
   root: {
@@ -46,8 +47,19 @@ class SimpleTable extends React.Component {
     this.setState({ openDialog: false });
   }
 
+  deleteContact = async name => {
+    let id = this.props.customers.filter(item => item.lastName === name)[0].id;
+    console.log(id);
+    try {
+      const response = await makeRequest(`deleteCustomer`, id );
+      const response2 = await makeRequest(`deleteContactDetails`, id );
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   render() {
-    console.log(this.state.openDialog)
+    console.log(this.props.details)
     return (
       <div>
         <Paper className={this.props.classes.root}>
@@ -80,7 +92,7 @@ class SimpleTable extends React.Component {
                     <Button variant="outlined" size="small" className={this.props.classes.margin}>
                       Edit Phone
                 </Button>
-                    <IconButton aria-label="Delete" className={this.props.classes.margin}>
+                    <IconButton aria-label="Delete" className={this.props.classes.margin} onClick={() => this.deleteContact(row.customer.lastName)}>
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </TableCell>

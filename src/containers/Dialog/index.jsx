@@ -60,7 +60,6 @@ export default class FormDialog extends React.Component {
         true;
 
     render() {
-        console.log(this.disableAdd(), newState, Object.values(newState).map(item => item.length === 0 ? true : false).length)
         return (
             <div>
                 <Dialog

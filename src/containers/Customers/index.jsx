@@ -43,7 +43,10 @@ class Customers extends Component {
         return (
             <div>
                 <div>
-                    <SimpleTable details={this.state.contactDetails} />
+                    <SimpleTable 
+                    details={this.state.contactDetails} 
+                    customers={this.state.customers} 
+                    />
                 </div>
             </div>
         )

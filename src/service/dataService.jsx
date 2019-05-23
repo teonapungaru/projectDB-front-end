@@ -2,7 +2,9 @@ import axios from 'axios';
 
 const METHODS = {
     GET: 'GET',
-    POST: 'POST'
+    POST: 'POST',
+    DELETE: 'DELETE',
+    PUT: 'PUT'
 }
 
 const BASE_URL = 'http://localhost:8080';
@@ -34,11 +36,15 @@ const CONFIG = {
     },
     'customer': {
         method: METHODS.POST,
-        url: `${BASE_URL}/api/v1/contacts`     
+        url: `${BASE_URL}/api/v1/customers/add`     
     },
     'car': {
         method: METHODS.POST,
         url: `${BASE_URL}/api/v1/cars`     
+    },
+    'deleteCustomer': {
+        method: METHODS.DELETE,
+        url: `${BASE_URL}/api/v1/customers` 
     }
 }
 
@@ -53,7 +59,7 @@ const makeRequest = (httpCall, payload = {}) => {
         try {
             const response = await axios({
                 method: requestData.method,
-                url: requestData.url,
+                url: httpCall === 'deleteCustomer' ? `${requestData.url}?id=${payload}` : requestData.url,
                 ...payload,
             })
 
