@@ -52,7 +52,7 @@ class Cars extends Component {
                 </div>
                 <div className="cards">
                     {this.state.cars.map((car, key) =>
-                        <MediaCard itemDetails={car} key={key} />
+                        <MediaCard itemDetails={car} key={key} title='deleteCar'/>
                     )}
                 </div>
                 <FormDialog

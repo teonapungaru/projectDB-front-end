@@ -45,6 +45,14 @@ const CONFIG = {
     'deleteCustomer': {
         method: METHODS.DELETE,
         url: `${BASE_URL}/api/v1/customers` 
+    },
+    'deleteCar': {
+        method: METHODS.DELETE,
+        url: `${BASE_URL}/api/v1/cars` 
+    },
+    'deleteAccessory': {
+        method: METHODS.DELETE,
+        url: `${BASE_URL}/api/v1/accessories` 
     }
 }
 
@@ -59,7 +67,7 @@ const makeRequest = (httpCall, payload = {}) => {
         try {
             const response = await axios({
                 method: requestData.method,
-                url: httpCall === 'deleteCustomer' ? `${requestData.url}?id=${payload}` : requestData.url,
+                url: httpCall.includes('delete') ? `${requestData.url}?id=${payload}` : requestData.url,
                 ...payload,
             })
 

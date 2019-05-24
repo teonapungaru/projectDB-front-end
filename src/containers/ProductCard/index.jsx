@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 
 import '../ProductCard/productCard.sass'
+import makeRequest from '../../service/dataService';
 
 const styles = {
     card: {
@@ -32,6 +33,15 @@ class MediaCard extends React.Component {
     //     }
     // }
 
+    deleteProduct = async id => {
+        console.log(this.props.itemDetails)
+        try {
+            const response = await makeRequest(`${this.props.title}`, id );
+          } catch (e) {
+            console.log(e);
+          }
+    }
+
     render() {
         return (
             <Card className={this.props.classes.card}>
@@ -45,7 +55,7 @@ class MediaCard extends React.Component {
                             {this.props.itemTitle}
                         </Typography>
                         <Typography component="div">
-                            {Object.entries(this.props.itemDetails).map((item, key) => item[0]!=='image'?
+                            {Object.entries(this.props.itemDetails).map((item, key) =>  !(item[0]==='id' || item[0]==='image') ?
                                 <TextField
                                     disabled
                                     label={item[0]}
@@ -58,14 +68,17 @@ class MediaCard extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions className="buttons">
-                    <Button size="small" color="default" onClick={this.sendPurchase}>
+                    <Button size="small" color="default" onClick={() =>this.sendPurchase}>
                         Add to cart
                     </Button>
-                    <Button size="small" color="default">
+                    <Button size="small" color="default" onClick={() => this.deleteProduct(this.props.itemDetails.id)}>
                         Delete
                     </Button>
                 </CardActions>
             </Card>
+            <Sales 
+
+            />
         );
     }
 }

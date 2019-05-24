@@ -14,11 +14,12 @@ import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 
 import FormDialog from '../Dialog';
+import EditDialog from '../Dialog/EditDetails.jsx'
 import makeRequest from '../../service/dataService';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: 1500,
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
@@ -40,7 +41,11 @@ class SimpleTable extends React.Component {
   }
 
   openDialog = () => {
-    this.setState({ openDialog: true })
+    this.setState({ openDialog: true, openEditDialog: true })
+  }
+
+  openEditDialog = () => {
+    this.setState({ openEditDialog: true })
   }
 
   handleClose = () => {
@@ -89,7 +94,7 @@ class SimpleTable extends React.Component {
                   <TableCell align="left">{row.street}</TableCell>
                   <TableCell align="left">{row.phoneNo}</TableCell>
                   <TableCell align="right">
-                    <Button variant="outlined" size="small" className={this.props.classes.margin}>
+                    <Button variant="outlined" size="small" className={this.props.classes.margin} onClick={this.openEditDialog}>
                       Edit Phone
                 </Button>
                     <IconButton aria-label="Delete" className={this.props.classes.margin} onClick={() => this.deleteContact(row.customer.lastName)}>
@@ -106,6 +111,12 @@ class SimpleTable extends React.Component {
           open={this.state.openDialog}
           fields={header}
           title='customer'
+        />
+        <EditDialog 
+          onClose={this.handleClose}
+          open={this.state.openEditDialog}
+          editField={this.props.details.phoneNo}
+          title='editDetails'
         />
       </div>
     );

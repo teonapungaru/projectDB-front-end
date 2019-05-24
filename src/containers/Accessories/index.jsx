@@ -51,7 +51,7 @@ class Accessories extends Component {
                 </div>
                 <div className="cards">
                     {this.state.accessories.map((accessory, key) =>
-                        <MediaCard itemDetails={accessory} key={key} />
+                        <MediaCard itemDetails={accessory} key={key} title='deleteAccessory'/>
                     )}
                 </div>
                 <FormDialog
