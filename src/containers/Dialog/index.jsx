@@ -38,6 +38,7 @@ export default class FormDialog extends React.Component {
     }
 
     handleChange = prop => event => {
+        console.
         this.setState({
             [prop]: event.target.value
         });
