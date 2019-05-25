@@ -65,6 +65,7 @@ class SimpleTable extends React.Component {
 
   edit = (phone) => {
     let editPerson = this.props.details.filter(item => item.phoneNo === phone);
+    console.log(editPerson)
     newDetails = {
       city: editPerson[0].city,
       street: editPerson[0].street,

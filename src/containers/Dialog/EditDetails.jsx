@@ -46,7 +46,7 @@ class EditDialog extends React.Component {
 
 
     submit = async () => {
-        Object.assign(newState, { customerId: this.editDetails.customerId });
+        Object.assign(newState, { customerId: this.props.editDetails.customerId });
         console.log(newState)
         try {
             const response = await makeRequest(`${this.props.title}`, { data: newState });
