@@ -34,7 +34,6 @@ class MediaCard extends React.Component {
     // }
 
     deleteProduct = async id => {
-        console.log(this.props.itemDetails)
         try {
             const response = await makeRequest(`${this.props.title}`, id );
           } catch (e) {
@@ -68,7 +67,7 @@ class MediaCard extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions className="buttons">
-                    <Button size="small" color="default" onClick={() =>this.sendPurchase}>
+                    <Button size="small" color="default" onClick={this.sendPurchase}>
                         Add to cart
                     </Button>
                     <Button size="small" color="default" onClick={() => this.deleteProduct(this.props.itemDetails.id)}>
@@ -76,9 +75,6 @@ class MediaCard extends React.Component {
                     </Button>
                 </CardActions>
             </Card>
-            <Sales 
-
-            />
         );
     }
 }

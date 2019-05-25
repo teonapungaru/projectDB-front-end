@@ -53,6 +53,10 @@ const CONFIG = {
     'deleteAccessory': {
         method: METHODS.DELETE,
         url: `${BASE_URL}/api/v1/accessories` 
+    },
+    'editDetails': {
+        method: METHODS.PUT,
+        url: `${BASE_URL}/api/v1/contacts`
     }
 }
 
@@ -71,7 +75,6 @@ const makeRequest = (httpCall, payload = {}) => {
                 ...payload,
             })
 
-            console.log(response.data.result);
             return resolve(response.data.result || response.data);
         } catch (err) {
             return reject(err.response.data.error || "Something went wrong please refresh");

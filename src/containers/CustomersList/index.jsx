@@ -32,6 +32,7 @@ const styles = theme => ({
 });
 
 const header = ['firstName', 'lastName', 'city', 'street', 'phoneNo'];
+let newDetails = {};
 
 class SimpleTable extends React.Component {
   constructor(props) {
@@ -49,12 +50,11 @@ class SimpleTable extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ openDialog: false });
+    this.setState({ openDialog: false, openEditDialog: false });
   }
 
   deleteContact = async name => {
     let id = this.props.customers.filter(item => item.lastName === name)[0].id;
-    console.log(id);
     try {
       const response = await makeRequest(`deleteCustomer`, id );
       const response2 = await makeRequest(`deleteContactDetails`, id );
@@ -63,8 +63,18 @@ class SimpleTable extends React.Component {
     }
   }
 
+  edit = (phone) => {
+    let editPerson = this.props.details.filter(item => item.phoneNo === phone);
+    newDetails = {
+      city: editPerson[0].city,
+      street: editPerson[0].street,
+      phoneNo: editPerson[0].phoneNo,
+      customerId: editPerson[0].customer.id
+    }
+    this.openEditDialog();
+  }
+
   render() {
-    console.log(this.props.details)
     return (
       <div>
         <Paper className={this.props.classes.root}>
@@ -94,8 +104,8 @@ class SimpleTable extends React.Component {
                   <TableCell align="left">{row.street}</TableCell>
                   <TableCell align="left">{row.phoneNo}</TableCell>
                   <TableCell align="right">
-                    <Button variant="outlined" size="small" className={this.props.classes.margin} onClick={this.openEditDialog}>
-                      Edit Phone
+                    <Button variant="outlined" size="small" className={this.props.classes.margin} onClick={() => this.edit(row.phoneNo)}>
+                      Edit Details
                 </Button>
                     <IconButton aria-label="Delete" className={this.props.classes.margin} onClick={() => this.deleteContact(row.customer.lastName)}>
                       <DeleteIcon fontSize="small" />
@@ -115,7 +125,7 @@ class SimpleTable extends React.Component {
         <EditDialog 
           onClose={this.handleClose}
           open={this.state.openEditDialog}
-          editField={this.props.details.phoneNo}
+          editDetails={newDetails}
           title='editDetails'
         />
       </div>

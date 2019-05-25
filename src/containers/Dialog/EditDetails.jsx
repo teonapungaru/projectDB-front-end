@@ -18,6 +18,7 @@ class EditDialog extends React.Component {
         };
     }
 
+
     handleClose = () => {
         this.setState({ open: false });
         this.props.onClose();
@@ -40,19 +41,21 @@ class EditDialog extends React.Component {
         this.setState({
             [prop]: event.target.value
         });
-        //Object.assign(newState, { [prop]: event.target.value });
+        Object.assign(newState, { [prop]: event.target.value });
     };
 
+
     submit = async () => {
-        console.log(this.state.phoneNo)
-        // try {
-        //     const response = await makeRequest(`${this.props.title}`, { data: this.state.phoneNo });
-        //     this.setState({
-        //         open: false
-        //     })
-        // } catch (e) {
-        //     console.log(e);
-        // }
+        Object.assign(newState, { customerId: this.editDetails.customerId });
+        console.log(newState)
+        try {
+            const response = await makeRequest(`${this.props.title}`, { data: newState });
+            this.setState({
+                open: false
+            })
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     disableAdd = () => Object.values(newState).map(item => item.length === 0 ? true : false).length !== 0 ?
@@ -60,6 +63,7 @@ class EditDialog extends React.Component {
         true;
 
     render() {
+        console.log(this.state, this.props.editDetails)
         return (
             <div>
                 <Dialog
@@ -69,14 +73,17 @@ class EditDialog extends React.Component {
                 >
                     <DialogTitle id="form-dialog-title">Edit details</DialogTitle>
                     <DialogContent>
+                        {Object.entries(this.props.editDetails).map((item, key) => item[0] !== 'customerId' ?
                             <TextField
                                 margin="dense"
-                                id={this.props.editField}
-                                label={this.props.editField}
+                                id={item[0]}
+                                label={item[0]}
                                 fullWidth
-                                value={this.state.phoneNo}
-                                onChange={this.handleChange(`phoneNo`)}
-                            />
+                                key={key}
+                                defaultValue={item[1]}
+                                onChange={this.handleChange(`${item[0]}`)}
+                            /> : null
+                        )}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose}>

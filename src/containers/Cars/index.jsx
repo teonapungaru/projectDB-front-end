@@ -42,7 +42,6 @@ class Cars extends Component {
     }
 
     render() {
-        console.log(this.state.cars)
         return (
             <div className="root">
                 <div className="add">
