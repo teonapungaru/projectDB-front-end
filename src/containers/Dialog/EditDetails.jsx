@@ -50,10 +50,12 @@ class EditDialog extends React.Component {
         console.log(newState)
         try {
             const response = await makeRequest(`${this.props.title}`, { data: newState });
+            this.props.snackBar(response, 'success');
             this.setState({
                 open: false
             })
         } catch (e) {
+            this.props.snackBar(e, 'error');
             console.log(e);
         }
     };

@@ -38,7 +38,6 @@ export default class FormDialog extends React.Component {
     }
 
     handleChange = prop => event => {
-        console.
         this.setState({
             [prop]: event.target.value
         });
@@ -48,10 +47,12 @@ export default class FormDialog extends React.Component {
     submit = async () => {
         try {
             const response = await makeRequest(`${this.props.title}`, { data: newState });
+            this.props.snackBar(response, 'success');
             this.setState({
                 open: false
             })
         } catch (e) {
+            this.props.snackBar(e, 'error');
             console.log(e);
         }
     };

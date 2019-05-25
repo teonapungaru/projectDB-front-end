@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import makeRequest from '../../service/dataService';
 
 import SimpleTable from '../CustomersList';
+import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 class Customers extends Component {
     constructor(props) {
@@ -13,6 +14,27 @@ class Customers extends Component {
             contactDetails: []
         }
     }
+
+    openSnackbar = (message, type) => {
+        if (type === 'success') {
+            this.setState({
+                snackbarVariant: SNACKBAR_TYPE.success,
+                snackbarMessage: message,
+                openSnackbar: true
+            });
+        } else {
+            this.setState({
+                snackbarVariant: SNACKBAR_TYPE.error,
+                snackbarMessage: message,
+                openSnackbar: true
+            });
+        }
+        window.location.reload();
+    }
+
+    handleClose = () => {
+        this.setState({ openSnackbar: false });
+      }
 
     getCustomers = async () => {
         try {
@@ -43,11 +65,18 @@ class Customers extends Component {
         return (
             <div>
                 <div>
-                    <SimpleTable 
-                    details={this.state.contactDetails} 
-                    customers={this.state.customers} 
+                    <SimpleTable
+                        details={this.state.contactDetails}
+                        customers={this.state.customers}
+                        snackBar={this.openSnackbar}
                     />
                 </div>
+                <Snackbars
+                    message={this.state.snackbarMessage}
+                    open={this.state.openSnackbar}
+                    handleClose={this.handleClose}
+                    variant={this.state.snackbarVariant}
+                />
             </div>
         )
     }

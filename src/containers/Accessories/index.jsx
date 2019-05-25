@@ -6,10 +6,11 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 
 import FormDialog from '../Dialog';
+import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 import '../Accessories/accessories.sass'
 
-const fields = ['name', 'price' ];
+const fields = ['name', 'price'];
 
 class Accessories extends Component {
     constructor(props) {
@@ -18,6 +19,23 @@ class Accessories extends Component {
         this.state = {
             accessories: []
         }
+    }
+
+    openSnackbar = (message, type) => {
+        if (type === 'success') {
+            this.setState({
+                snackbarVariant: SNACKBAR_TYPE.success,
+                snackbarMessage: message,
+                openSnackbar: true
+            });
+        } else {
+            this.setState({
+                snackbarVariant: SNACKBAR_TYPE.error,
+                snackbarMessage: message,
+                openSnackbar: true
+            });
+        }
+        window.location.reload();
     }
 
     getAccessories = async () => {
@@ -51,7 +69,7 @@ class Accessories extends Component {
                 </div>
                 <div className="cards">
                     {this.state.accessories.map((accessory, key) =>
-                        <MediaCard itemDetails={accessory} key={key} title='deleteAccessory'/>
+                        <MediaCard itemDetails={accessory} key={key} title='deleteAccessory' snackBar={this.openSnackbar} />
                     )}
                 </div>
                 <FormDialog
@@ -59,6 +77,13 @@ class Accessories extends Component {
                     open={this.state.openDialog}
                     fields={fields}
                     title='accessory'
+                    snackBar={this.openSnackbar}
+                />
+                <Snackbars
+                    message={this.state.snackbarMessage}
+                    open={this.state.openSnackbar}
+                    handleClose={this.handleClose}
+                    variant={this.state.snackbarVariant}
                 />
             </div>
         )

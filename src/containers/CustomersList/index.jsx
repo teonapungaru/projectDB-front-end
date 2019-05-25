@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 import FormDialog from '../Dialog';
 import EditDialog from '../Dialog/EditDetails.jsx'
 import makeRequest from '../../service/dataService';
+import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 const styles = theme => ({
   root: {
@@ -50,15 +51,16 @@ class SimpleTable extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ openDialog: false, openEditDialog: false });
+    this.setState({ openDialog: false, openEditDialog: false, openSnackbar: false });
   }
 
   deleteContact = async name => {
     let id = this.props.customers.filter(item => item.lastName === name)[0].id;
     try {
-      const response = await makeRequest(`deleteCustomer`, id );
-      const response2 = await makeRequest(`deleteContactDetails`, id );
+      const response = await makeRequest(`deleteCustomer`, id);
+      this.props.snackBar(response, 'success');
     } catch (e) {
+      this.props.snackBar(e, 'error');
       console.log(e);
     }
   }
@@ -73,6 +75,23 @@ class SimpleTable extends React.Component {
       customerId: editPerson[0].customer.id
     }
     this.openEditDialog();
+  }
+
+  openSnackbar = (message, type) => {
+    if (type === 'success') {
+      this.setState({
+        snackbarVariant: SNACKBAR_TYPE.success,
+        snackbarMessage: message,
+        openSnackbar: true
+      });
+    } else {
+      this.setState({
+        snackbarVariant: SNACKBAR_TYPE.error,
+        snackbarMessage: message,
+        openSnackbar: true
+      });
+    }
+    window.location.reload();
   }
 
   render() {
@@ -122,12 +141,20 @@ class SimpleTable extends React.Component {
           open={this.state.openDialog}
           fields={header}
           title='customer'
+          snackBar={this.openSnackbar}
         />
-        <EditDialog 
+        <EditDialog
           onClose={this.handleClose}
           open={this.state.openEditDialog}
           editDetails={newDetails}
           title='editDetails'
+          snackBar={this.openSnackbar}
+        />
+        <Snackbars
+          message={this.state.snackbarMessage}
+          open={this.state.openSnackbar}
+          handleClose={this.handleClose}
+          variant={this.state.snackbarVariant}
         />
       </div>
     );

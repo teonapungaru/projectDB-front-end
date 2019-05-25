@@ -36,7 +36,9 @@ class MediaCard extends React.Component {
     deleteProduct = async id => {
         try {
             const response = await makeRequest(`${this.props.title}`, id );
+            this.props.snackBar(response, 'success');
           } catch (e) {
+            this.props.snackBar(e, 'error');
             console.log(e);
           }
     }
