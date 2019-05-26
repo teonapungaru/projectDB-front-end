@@ -10,7 +10,7 @@ import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 import '../Cars/cars.sass'
 
-const fields =['model', 'engine', 'horsePower', 'fuelType', 'price'];
+const fields =['model', 'engine', 'horsePower', 'fuelType', 'price', 'image'];
 
 class Cars extends Component {
     constructor(props) {
@@ -77,6 +77,7 @@ class Cars extends Component {
                     open={this.state.openDialog}
                     fields={fields}
                     title='car'
+                    snackBar={this.openSnackbar}
                 />
                 <Snackbars
               message={this.state.snackbarMessage}

@@ -43,7 +43,7 @@ class SimpleTable extends React.Component {
   }
 
   openDialog = () => {
-    this.setState({ openDialog: true, openEditDialog: true })
+    this.setState({ openDialog: true })
   }
 
   openEditDialog = () => {

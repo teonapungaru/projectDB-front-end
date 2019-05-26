@@ -10,7 +10,7 @@ import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 import '../Accessories/accessories.sass'
 
-const fields = ['name', 'price'];
+const fields = ['name', 'price', 'image'];
 
 class Accessories extends Component {
     constructor(props) {
