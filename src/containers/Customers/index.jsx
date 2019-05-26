@@ -34,7 +34,7 @@ class Customers extends Component {
 
     handleClose = () => {
         this.setState({ openSnackbar: false });
-      }
+    }
 
     getCustomers = async () => {
         try {

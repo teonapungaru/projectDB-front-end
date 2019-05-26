@@ -10,7 +10,7 @@ import { Snackbars, SNACKBAR_TYPE } from "../Snackbar";
 
 import '../Cars/cars.sass'
 
-const fields =['model', 'engine', 'horsePower', 'fuelType', 'price', 'image'];
+const fields = ['model', 'engine', 'horsePower', 'fuelType', 'price', 'image'];
 
 class Cars extends Component {
     constructor(props) {
@@ -35,20 +35,20 @@ class Cars extends Component {
     }
 
     openSnackbar = (message, type) => {
-        if(type === 'success') {
+        if (type === 'success') {
             this.setState({
                 snackbarVariant: SNACKBAR_TYPE.success,
                 snackbarMessage: message,
                 openSnackbar: true
-              });
+            });
         } else {
             this.setState({
                 snackbarVariant: SNACKBAR_TYPE.error,
                 snackbarMessage: message,
                 openSnackbar: true
-              });
-        } 
-        window.location.reload();  
+            });
+        }
+        window.location.reload();
     }
 
     handleClose = () => {
@@ -69,7 +69,7 @@ class Cars extends Component {
                 </div>
                 <div className="cards">
                     {this.state.cars.map((car, key) =>
-                        <MediaCard itemDetails={car} key={key} title='deleteCar' snackBar={this.openSnackbar}/>
+                        <MediaCard itemDetails={car} key={key} title='deleteCar' snackBar={this.openSnackbar} />
                     )}
                 </div>
                 <FormDialog
@@ -80,11 +80,11 @@ class Cars extends Component {
                     snackBar={this.openSnackbar}
                 />
                 <Snackbars
-              message={this.state.snackbarMessage}
-              open={this.state.openSnackbar}
-              handleClose={this.handleClose}
-              variant={this.state.snackbarVariant}
-            />
+                    message={this.state.snackbarMessage}
+                    open={this.state.openSnackbar}
+                    handleClose={this.handleClose}
+                    variant={this.state.snackbarVariant}
+                />
             </div>
         )
     }
